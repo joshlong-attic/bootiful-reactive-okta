@@ -120,7 +120,7 @@ class WebsocketConfiguration(val om: ObjectMapper) {
 		val events = Flux.create(pcep).share()
 		return WebSocketHandler { session ->
 			val messages = events
-					.map { om.writeValueAsString(it) }
+					.map { om.writeValueAsString(it.profile) }
 					.map { session.textMessage(it) }
 			session.send(messages)
 		}
