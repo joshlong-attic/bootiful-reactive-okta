@@ -177,7 +177,7 @@ class ProfileService {
 	Mono<Profile> create(String email) {
 		return this.repository
 			.save(new Profile(null, email))
-			.doOnSuccess(p -> this.publisher.publishEvent(new ProfileCreatedEvent(p)));
+			.doOnSuccess(p -> this.publisher.publishEvent(new ProfileCreatedEvent(p.getSource())));
 	}
 }
 
